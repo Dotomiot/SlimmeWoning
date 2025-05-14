@@ -22,16 +22,18 @@ class Lamp(Apparaat):
         else:
             return f"Mijn helderheid is {self.helderheid}% en ik sta uit"
     
-lama = Lamp(20)
-print(lama.helderheid)
-print(lama.statusAan)
+if __name__ == "__main__":
 
-print(lama)
+    lama = Lamp(20)
+    print(lama.helderheid)
+    print(lama.statusAan)
 
-lama.veranderHelderheid(69)
-lama.pasStatusAan(True)
+    print(lama)
 
-print(lama.helderheid)
-print(lama.statusAan)
+    lama.veranderHelderheid(69)
+    lama.pasStatusAan(True)
 
-print(lama)
+    print(lama.helderheid)
+    print(lama.statusAan)
+
+    print(lama)
