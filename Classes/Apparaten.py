@@ -1,9 +1,13 @@
 class Apparaat:
     def __init__(self):
         self.statusAan = False
+        self.subcribtions = {}
 
     def pas_status_aan(self, status):
         self.statusAan = status
+
+    def recieve_mqtt(self, topic, data):
+        self.subcribtions[topic] = data
 
 class Lamp(Apparaat):
     def __init__(self, helderheid=0):
