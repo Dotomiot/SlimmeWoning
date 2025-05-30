@@ -29,6 +29,6 @@ def maak_huisHTML(woning: Woning):
     return returnHTML
 
 def write_HTML(HTML,file="huis.html"):
-    file = open("huis.html", "w")
+    file = open("_site/huis.html", "w")
     file.write(HTML)
     file.close()
