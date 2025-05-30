@@ -171,6 +171,8 @@ def example_subscriptions(woning: Woning):
 
 
 def list_all_mqtt_topics(woning: Woning):
+    counter_topics = 0
+    complete_topic_list = []
     for kamer in woning.kamers:
         for apparaat in kamer.apparaten_lijst:
             lijst = apparaat.subcribtion_topic_list
@@ -179,22 +181,47 @@ def list_all_mqtt_topics(woning: Woning):
                 continue
             else:
                 for topic in lijst:
-                    print(topic)
+                    counter_topics += 1
+                    print(f"{counter_topics}: {topic}")
+                    complete_topic_list.append(topic)
+    return complete_topic_list
     
 
-def list_all_mqtt_data(woning: Woning):
-    print()
-    print("HELO")
-    print()
+def list_all_mqtt_data(woning: Woning, print_topics=True):
+    complete_dictionary = {}
     for kamer in woning.kamers:
         for apparaat in kamer.apparaten_lijst:
             dicti = apparaat.subcribtions
-            if dicti == {}:
+            if dicti == {} and print_topics:
                 print("empty")
                 continue
             else:
-                print(dicti)
+                if print_topics:
+                    print(dicti)
+                complete_dictionary.update(dicti)
+    return complete_dictionary
 
+def publish_mqtt_topic_terminal(woning: Woning):
+    topic_list = list_all_mqtt_topics(woning)
+    topic_number = input(f"Kies een topic van de {len(topic_list)} topics: ")
+    try:
+        topic_number = int(topic_number)
+    except:
+        print("Not a number, so choosing 1")
+        topic_number = 1
+    print(topic_number)
+    topic_str = topic_list[topic_number-1]
+    print(topic_str)
+    topic = MQTT_topic(topic_str)
+
+    dictionary = list_all_mqtt_data(woning, False)
+    print(dictionary[topic_str])
+    
+    data = input(f"Wat is de nieuwe data voor {topic_str}? ")
+    topic.publish(data)
+
+    dictionary = list_all_mqtt_data(woning, False)
+    print(dictionary[topic_str])    # Data did not change, will fix later
 
 
 def main():
@@ -229,12 +256,12 @@ def main():
     print(f"\n\n{bewoner_Tom.naam}:")
     for i in range(AANTAL_STAPPEN):
 
-        answer = input("Press enter to take a step, 1 to view all the IOT data, 2 to write to an IOT device: ")
+        answer = input("Press enter to take a step, 1 to view all the IOT data, 2 to publish to an MQTT topic: ")
         match answer:
-            case "": print("enter")
+            case "": print("Taking a step")
             case "1": list_all_mqtt_data(woning)
-            case "2": list_all_mqtt_topics(woning)
-            case _: print("not a good response"); 
+            case "2": publish_mqtt_topic_terminal(woning)
+            case _: print("Not a good response, just taking a step"); 
 
         # print(bewoner_Tom.beweeg_bewoner(woning.kamers), end="\t")
         bewoner_Tom.beweeg_bewoner(woning.kamers)
