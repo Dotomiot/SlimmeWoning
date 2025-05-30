@@ -1,12 +1,18 @@
 from .Kamer import Kamer
+from .Smarthub import Smarthub
 
 class Woning():
     def __init__(self,naam="Huis"):
-        self.kamers: list[Kamer] = []
         self.naam = naam
+        
+        self.kamers: list[Kamer] = []
+        self.smarthub: list[Smarthub] = []
 
     def voeg_kamer_toe(self, kamer:Kamer):
         self.kamers.append(kamer)
+
+    def voeg_smarthub_toe(self, hub:Smarthub):
+        self.smarthub.append(hub)
 
 # def main():
 #     kamer1 = Kamer("slaap")
