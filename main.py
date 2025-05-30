@@ -6,40 +6,104 @@ from Classes.Smarthub import Smarthub
 from Classes.Woning import Woning
 
 
-def kamer1():
-    lampje = Lamp(50)
-    slot = Deurslot(True)
+def woonkamer():
+    lampje = Lamp(75)
+    thermos = Thermostaat(22)
+    beweger = Bewegingssensor()
+    roker = Rookmelder()
 
-    kamer = Kamer("slaap")
+
+    kamer = Kamer("woonkamer")
     kamer.voeg_apparaat_toe(lampje)
-    kamer.voeg_apparaat_toe(slot)
+    kamer.voeg_apparaat_toe(thermos)
+    kamer.voeg_apparaat_toe(beweger)
+    kamer.voeg_apparaat_toe(roker)
 
     return kamer
 
-def kamer2():
-    lampje = Lamp(100)
-    slot = Deurslot(False)
-
-    kamer = Kamer("bad")
-    kamer.voeg_apparaat_toe(lampje)
-    kamer.voeg_apparaat_toe(slot)
-
-    return kamer
-
-def kamer3():
-    lampje = Lamp(0)
+def keuken():
+    lampje = Lamp(80)
+    thermos = Thermostaat(20)
+    beweger = Bewegingssensor()
 
     kamer = Kamer("keuken")
     kamer.voeg_apparaat_toe(lampje)
+    kamer.voeg_apparaat_toe(thermos)
+    kamer.voeg_apparaat_toe(beweger)
+
+    return kamer
+
+def slaapkamer1():
+    lampje = Lamp(30)
+    slot = Deurslot(True)
+    thermos = Thermostaat(20)
+    beweger = Bewegingssensor()
+    roker = Rookmelder()
+    gordijn = Gordijn()
+
+    kamer = Kamer("slaapkamer1")
+    kamer.voeg_apparaat_toe(lampje)
+    kamer.voeg_apparaat_toe(slot)
+    kamer.voeg_apparaat_toe(thermos)
+    kamer.voeg_apparaat_toe(beweger)
+    kamer.voeg_apparaat_toe(roker)
+    kamer.voeg_apparaat_toe(gordijn)
+
+    return kamer
+
+def slaapkamer2():
+    lampje = Lamp(30)
+    slot = Deurslot(True)
+    thermos = Thermostaat(20)
+    beweger = Bewegingssensor()
+    roker = Rookmelder()
+    gordijn = Gordijn()
+
+    kamer = Kamer("slaapkamer2")
+    kamer.voeg_apparaat_toe(lampje)
+    kamer.voeg_apparaat_toe(slot)
+    kamer.voeg_apparaat_toe(thermos)
+    kamer.voeg_apparaat_toe(beweger)
+    kamer.voeg_apparaat_toe(roker)
+    kamer.voeg_apparaat_toe(gordijn)
+
+    return kamer
+
+def badkamer():
+    lampje = Lamp(100)
+    slot = Deurslot(False)
+    thermos = Thermostaat(22)
+    beweger = Bewegingssensor()
+
+    kamer = Kamer("badkamer")
+    kamer.voeg_apparaat_toe(lampje)
+    kamer.voeg_apparaat_toe(slot)
+    kamer.voeg_apparaat_toe(thermos)
+    kamer.voeg_apparaat_toe(beweger)
+
+    return kamer
+
+def gang():
+    lampje = Lamp(0)
+    beweger = Bewegingssensor()
+    roker = Rookmelder()
+
+    kamer = Kamer("keuken")
+    kamer.voeg_apparaat_toe(lampje)
+    kamer.voeg_apparaat_toe(beweger)
+    kamer.voeg_apparaat_toe(roker)
 
     return kamer
 
 def start_toestand():
 
     woning = Woning()
-    woning.voeg_kamer_toe(kamer1())
-    woning.voeg_kamer_toe(kamer2())
-    woning.voeg_kamer_toe(kamer3())
+    woning.voeg_kamer_toe(woonkamer())
+    woning.voeg_kamer_toe(keuken())
+    woning.voeg_kamer_toe(slaapkamer1())
+    woning.voeg_kamer_toe(slaapkamer2())
+    woning.voeg_kamer_toe(badkamer())
+    woning.voeg_kamer_toe(gang())
 
     # for kamer in woning.kamers:
     #     print(kamer.naam)

@@ -56,10 +56,24 @@ class Deurslot(Apparaat):
 class Bewegingssensor(Apparaat):
     def __init__(self):
         super().__init__()
+        self.statusAan = False
+        
+    def detecteer(self):
+        self.statusAan = not self.statusAan
 
 class Rookmelder(Apparaat):
     def __init__(self):
         super().__init__()
+        self.statusAan = False
+        self._fireDetectionThreshold = 69
+        self.fireDetection = 0
+
+    def detectFire(self, firePercentage):
+        self.fireDetection = firePercentage
+        if firePercentage >= self._fireDetectionThreshold:
+            print(f"VUUR! ER IS BRAND! PASUIT!")
+        else:
+            print(f"Er is geen vuurdetectie")
 
 class Gordijn(Apparaat):
     def __init__(self):
