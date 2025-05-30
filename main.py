@@ -149,14 +149,11 @@ def terminal_start():
     while looping:
         answer = input()
         try:
-            if answer == "":
-                return DEFAULT
-            
-            elif answer == 'q' or answer == 'Q':
-                print("Quit program early")
-                return 0
-            else:
-                return int(answer)
+            match answer:
+                case "": return DEFAULT
+                case "q": print("Quit program early"); return 0
+                case "Q": print("Quit program early"); return 0
+                case _: return int(answer)
         except:
             print(f"Geen getal, probeer opnieuw of 'q' om te stoppen" )
 
@@ -190,6 +187,14 @@ def main():
     bewoner_Tom = Bewoner("Tom")
     print(f"\n\n{bewoner_Tom.naam}:")
     for i in range(AANTAL_STAPPEN):
+
+        answer = input("Press enter to take a step, 1 to view all the IOT data, 2 to write to an IOT device: ")
+        match answer:
+            case "": print("enter")
+            case "1": print(1)
+            case "2": print(2)
+            case _: print("not a good response"); 
+
         # print(bewoner_Tom.beweeg_bewoner(woning.kamers), end="\t")
         bewoner_Tom.beweeg_bewoner(woning.kamers)
         print(f"\t============ Stap {i+1} ============\n")
@@ -198,7 +203,7 @@ def main():
         write_HTML(maak_huisHTML(woning))
 
         print()
-        time.sleep(0.5)
+        # time.sleep(0.5)
     
 if __name__ == "__main__":
     main()
