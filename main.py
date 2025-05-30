@@ -196,14 +196,33 @@ def logger(woning, huidigeKamerInt, vorigeKamerInt):
         print(f"\t\t{str(type(apparaat))[26:-2]}\tstaat {status}")
 
 
+def terminal_start():
+    looping = True
+    DEFAULT = 10
+
+    print(f"Hoeveel stappen in de simulatie? (default={DEFAULT}) ('q' om te stoppen): ")
+
+    while looping:
+        answer = input()
+        try:
+            if answer == "":
+                return DEFAULT
+            
+            elif answer == 'q' or answer == 'Q':
+                print("Quit program early")
+                return 0
+            else:
+                return int(answer)
+        except:
+            print(f"Geen getal, probeer opnieuw of 'q' om te stoppen" )
 
 
+def main():
+    AANTAL_STAPPEN = terminal_start()
 
+    if AANTAL_STAPPEN == 0:
+        return
 
-
-
-if __name__ == "__main__":
-    # main()
     woning = start_toestand()
     # mane(woning)
 
@@ -212,7 +231,7 @@ if __name__ == "__main__":
 
     bewoner_Tom = Bewoner("Tom")
     print(f"\n\n{bewoner_Tom.naam}:")
-    for i in range(5):
+    for i in range(AANTAL_STAPPEN):
         # print(bewoner_Tom.beweeg_bewoner(woning.kamers), end="\t")
         bewoner_Tom.beweeg_bewoner(woning.kamers)
         print(f"\t============ Stap {i+1} ============\n")
@@ -222,3 +241,5 @@ if __name__ == "__main__":
         print()
         time.sleep(1)
     
+if __name__ == "__main__":
+    main()
