@@ -158,6 +158,45 @@ def terminal_start():
             print(f"Geen getal, probeer opnieuw of 'q' om te stoppen" )
 
 
+def example_subscriptions(woning: Woning):
+    mqtt_test_topic = f"test/"
+    for kamer in woning.kamers:
+        mqtt_kamer_topic = mqtt_test_topic + f"{kamer}/"
+        for apparaat in kamer.apparaten_lijst:
+            mqtt_topic = mqtt_kamer_topic+f"{str(type(apparaat))[26:-2]}"
+            mqtt = MQTT_topic(mqtt_topic)
+
+            mqtt.subscribe(apparaat)
+            mqtt.publish(f"{str(type(apparaat))[26:-2]}")
+
+
+def list_all_mqtt_topics(woning: Woning):
+    for kamer in woning.kamers:
+        for apparaat in kamer.apparaten_lijst:
+            lijst = apparaat.subcribtion_topic_list
+            if lijst == []:
+                print("empty")
+                continue
+            else:
+                for topic in lijst:
+                    print(topic)
+    
+
+def list_all_mqtt_data(woning: Woning):
+    print()
+    print("HELO")
+    print()
+    for kamer in woning.kamers:
+        for apparaat in kamer.apparaten_lijst:
+            dicti = apparaat.subcribtions
+            if dicti == {}:
+                print("empty")
+                continue
+            else:
+                print(dicti)
+
+
+
 def main():
     AANTAL_STAPPEN = terminal_start()
 
@@ -184,6 +223,8 @@ def main():
     print(slimme.subcribtion_topic_list)
     print(slimme.subcribtions)
 
+    example_subscriptions(woning)
+
     bewoner_Tom = Bewoner("Tom")
     print(f"\n\n{bewoner_Tom.naam}:")
     for i in range(AANTAL_STAPPEN):
@@ -191,8 +232,8 @@ def main():
         answer = input("Press enter to take a step, 1 to view all the IOT data, 2 to write to an IOT device: ")
         match answer:
             case "": print("enter")
-            case "1": print(1)
-            case "2": print(2)
+            case "1": list_all_mqtt_data(woning)
+            case "2": list_all_mqtt_topics(woning)
             case _: print("not a good response"); 
 
         # print(bewoner_Tom.beweeg_bewoner(woning.kamers), end="\t")
