@@ -245,7 +245,11 @@ def publish_mqtt_topic_terminal(woning: Woning):
 def main():
     SCENARIO = terminal_scenario()
 
-    print(SCENARIO)
+    if SCENARIO == 3:
+        print("Er is geen gebruiker thuis, er is geen simulatie")
+        print("Het programma sluit af")
+        return
+    
 
     AANTAL_STAPPEN = terminal_start()
 
@@ -256,6 +260,8 @@ def main():
     # mane(woning)
 
     slimme = woning.smarthub
+
+    # voorbeelden van mogelijke subscriptions voor de smarthub in het MQTT systeem:
 
     # MQTT_SLAAPKAMER1_SLOT = MQTT_topic("slimHuis/slaapkamer1/slot")
     # MQTT_SLAAPKAMER1_TEMP = MQTT_topic("slimHuis/slaapkamer1/temp")
@@ -288,7 +294,7 @@ def main():
         # print(bewoner_Tom.beweeg_bewoner(woning.kamers), end="\t")
         bewoner_Tom.beweeg_bewoner(woning.kamers)
         print(f"\t============ Stap {i+1} ============\n")
-        slimme.voer_regel_uit(woning, bewoner_Tom.huidigeKamerInt,bewoner_Tom.vorigeKamerInt)
+        slimme.voer_regel_uit(woning, bewoner_Tom.huidigeKamerInt,bewoner_Tom.vorigeKamerInt, SCENARIO)
         logger(woning, bewoner_Tom.huidigeKamerInt,bewoner_Tom.vorigeKamerInt)
         write_HTML(maak_huisHTML(woning))
 
