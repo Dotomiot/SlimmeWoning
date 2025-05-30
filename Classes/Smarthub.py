@@ -4,7 +4,14 @@ from .Woning import Woning
 
 class Smarthub():
     def __init__(self):
-        pass
+        self.subcribtion_topic_list = []
+        self.subcribtions = {}
+
+    def subscribe(self, topic):
+        self.subcribtion_topic_list.append(topic)
+
+    def recieve_mqtt(self, topic, data):
+        self.subcribtions[topic] = data
 
     def voer_regel_uit(self, woning: Woning, kamer: int, vorige_kamer: int):
         # print(kamer, end="\t")
