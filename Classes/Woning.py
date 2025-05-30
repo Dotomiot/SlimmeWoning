@@ -1,8 +1,9 @@
 from .Kamer import Kamer
 
 class Woning():
-    def __init__(self):
+    def __init__(self,naam="Huis"):
         self.kamers: list[Kamer] = []
+        self.naam = naam
 
     def voeg_kamer_toe(self, kamer:Kamer):
         self.kamers.append(kamer)
