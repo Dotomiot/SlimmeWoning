@@ -58,8 +58,6 @@ class Smarthub():
         self.subcribtions[topic] = data
 
     def voer_regel_uit(self, woning: Woning, kamer: int, vorige_kamer: int, scenario=1):
-        # print(kamer, end="\t")
-        # print(vorige_kamer, end="\t")
 
         kamer: Kamer = woning.kamers[kamer]
         vorige_kamer: Kamer = woning.kamers[vorige_kamer]

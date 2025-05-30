@@ -114,30 +114,7 @@ def start_toestand():
     woning.voeg_kamer_toe(gang())
     woning.voeg_smarthub_toe(smarthub())
 
-    # for kamer in woning.kamers:
-    #     print(kamer.naam)
-    #     for apparaat in kamer.apparaten_lijst:
-    #         print(f"\t {apparaat}")
-
-    # print()
-    # print(len(woning.kamers))
-    # print(woning.kamers[0])
-    # print(woning.kamers[2])
-
-
     return woning
-
-
-def mane(woning: Woning):
-    for kamer in woning.kamers:
-        print(kamer.naam)
-        for apparaat in kamer.apparaten_lijst:
-            print(f"\t {apparaat}")
-
-    print()
-    print(len(woning.kamers))
-    print(woning.kamers[0])
-    print(woning.kamers[2])
 
 
 def terminal_scenario():
@@ -257,7 +234,6 @@ def main():
         return
 
     woning = start_toestand()
-    # mane(woning)
 
     slimme = woning.smarthub
 
@@ -281,7 +257,7 @@ def main():
     example_subscriptions(woning)
 
     bewoner_Tom = Bewoner("Tom")
-    # print(f"\n\n{bewoner_Tom.naam}:")
+
     for i in range(AANTAL_STAPPEN):
 
         answer = input("Press enter to take a step, 1 to view all the IOT data, 2 to publish to an MQTT topic: ")
@@ -291,7 +267,6 @@ def main():
             case "2": publish_mqtt_topic_terminal(woning)
             case _: print("Not a good response, just taking a step"); 
 
-        # print(bewoner_Tom.beweeg_bewoner(woning.kamers), end="\t")
         bewoner_Tom.beweeg_bewoner(woning.kamers)
         print(f"\t============ Stap {i+1} ============\n")
         slimme.voer_regel_uit(woning, bewoner_Tom.huidigeKamerInt,bewoner_Tom.vorigeKamerInt, SCENARIO)
@@ -299,7 +274,6 @@ def main():
         write_HTML(maak_huisHTML(woning))
 
         print()
-        # time.sleep(0.5)
     
 if __name__ == "__main__":
     main()

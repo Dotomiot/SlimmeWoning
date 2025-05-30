@@ -87,23 +87,3 @@ class Gordijn(Apparaat):
     def __init__(self):
         super().__init__()
 
-    
-
-def main():
-    lama = Lamp(20)
-    print(lama.helderheid)
-    print(lama.statusAan)
-
-    print(lama)
-
-    lama.verander_helderheid(69)
-    lama.pas_status_aan(True)
-
-    print(lama.helderheid)
-    print(lama.statusAan)
-
-    print(lama)
-
-
-if __name__ == "__main__":
-    main 

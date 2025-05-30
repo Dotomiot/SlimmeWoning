@@ -4,10 +4,10 @@ def maak_huisHTML(woning: Woning):
     returnHTML = f"<h1>{woning.naam}</h1>"
 
     for kamer in woning.kamers:
-        # print(kamer.naam)
+        
         returnHTML += f"<ul><h2>{kamer.naam}</h2>"
+
         for apparaat in kamer.apparaten_lijst:
-            # print(f"\t {apparaat}")
             returnHTML += f"<li>{str(type(apparaat))[26:-2]}: {apparaat.statusAan}</li>"
         returnHTML += f"</ul>"
 

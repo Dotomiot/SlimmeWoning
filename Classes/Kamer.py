@@ -8,7 +8,6 @@ class Kamer:
 
     def voeg_apparaat_toe(self, apparaat:Apparaat):
         self.apparaten_lijst.append(apparaat)
-
  
     def __str__(self):
         return self.naam

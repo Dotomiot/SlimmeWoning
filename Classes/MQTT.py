@@ -8,14 +8,6 @@ class MQTT_topic():
         self.topic = topic
         self.subscribers: list[Apparaat] = []
 
-    # def subscribe(self, apparaat: Apparaat):
-    #     self.subscribers.append(apparaat)
-    #     apparaat.subscribe(self.topic)
-
-    # def subscribe(self, smarthub: Smarthub):
-    #     self.subscribers.append(smarthub)
-    #     smarthub.subscribe(self.topic)
-
     def subscribe(self, apparaat: Union[Apparaat, Smarthub]):
         if apparaat is None:
             return
