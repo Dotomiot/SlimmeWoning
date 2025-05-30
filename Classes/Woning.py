@@ -4,15 +4,15 @@ from .Smarthub import Smarthub
 class Woning():
     def __init__(self,naam="Huis"):
         self.naam = naam
-        
+
         self.kamers: list[Kamer] = []
-        self.smarthub: list[Smarthub] = []
+        self.smarthub: Smarthub
 
     def voeg_kamer_toe(self, kamer:Kamer):
         self.kamers.append(kamer)
 
     def voeg_smarthub_toe(self, hub:Smarthub):
-        self.smarthub.append(hub)
+        self.smarthub = hub
 
 # def main():
 #     kamer1 = Kamer("slaap")

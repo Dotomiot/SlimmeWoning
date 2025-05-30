@@ -4,6 +4,7 @@ from Classes.Bewoner import Bewoner
 from Classes.Kamer import Kamer
 from Classes.Smarthub import Smarthub
 from Classes.Woning import Woning
+from Classes.MQTT import MQTT_topic
 import time
 
 from logger import logger
@@ -98,6 +99,10 @@ def gang():
 
     return kamer
 
+def smarthub():
+    smarthub = Smarthub()
+    return smarthub
+
 def start_toestand():
 
     woning = Woning()
@@ -107,6 +112,7 @@ def start_toestand():
     woning.voeg_kamer_toe(slaapkamer2())
     woning.voeg_kamer_toe(badkamer())
     woning.voeg_kamer_toe(gang())
+    woning.voeg_kamer_toe(smarthub())
 
     # for kamer in woning.kamers:
     #     print(kamer.naam)
@@ -164,8 +170,22 @@ def main():
     woning = start_toestand()
     # mane(woning)
 
-    slimme = Smarthub()
+    slimme = woning.smarthub
 
+    MQTT_SLAAPKAMER1_SLOT = MQTT_topic("slimHuis/slaapkamer1/slot")
+    MQTT_SLAAPKAMER1_TEMP = MQTT_topic("slimHuis/slaapkamer1/temp")
+
+    MQTT_SLAAPKAMER1_SLOT.subscribe(slimme)
+    MQTT_SLAAPKAMER1_TEMP.subscribe(slimme)
+
+    warma = Thermostaat(32)
+
+    MQTT_SLAAPKAMER1_TEMP.publish(warma.geef_temperatuur())
+    print(slimme.subcribtions)
+    MQTT_SLAAPKAMER1_TEMP.publish(warma.geef_temperatuur()+1)
+
+    print(slimme.subcribtion_topic_list)
+    print(slimme.subcribtions)
 
     bewoner_Tom = Bewoner("Tom")
     print(f"\n\n{bewoner_Tom.naam}:")
