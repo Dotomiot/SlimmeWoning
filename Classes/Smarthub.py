@@ -82,7 +82,7 @@ class Smarthub():
             elif str(type(apparaat)).find("Rook") == 26:
                 rookmelder:Rookmelder = apparaat
 
-                rookmelder.statusAan = False
+                # rookmelder.statusAan = False
 
             elif str(type(apparaat)).find("Gordijn") == 26:
                 gordijn:Gordijn = apparaat

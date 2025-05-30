@@ -4,7 +4,7 @@ from Classes.Bewoner import Bewoner
 from Classes.Kamer import Kamer
 from Classes.Smarthub import Smarthub
 from Classes.Woning import Woning
-
+import time
 
 def woonkamer():
     lampje = Lamp(75)
@@ -131,16 +131,44 @@ def mane(woning: Woning):
     print(woning.kamers[2])
 
 
-def logger(woning, huidigeKamerInt, vorigeKamerInt):
-    # for kamer in woning.kamers:
-    #     print(kamer)
-    #     for apparaat in kamer.apparaten_lijst:
-    #         print(f"\t{str(type(apparaat))[26:-2]}: {apparaat}")
+# def logger(woning, huidigeKamerInt, vorigeKamerInt):
+#     # for kamer in woning.kamers:
+#     #     print(kamer)
+#     #     for apparaat in kamer.apparaten_lijst:
+#     #         print(f"\t{str(type(apparaat))[26:-2]}: {apparaat}")
 
-    # print()
+#     # print()
+
+#     kamer: Kamer = woning.kamers[huidigeKamerInt]
+#     # print(kamer.naam)
+#     for apparaat in kamer.apparaten_lijst:
+#         # print(f"\t{str(type(apparaat))[26:-2]}: {apparaat}")
+
+#         if apparaat.statusAan:
+#             status = "aan"
+#         else:
+#             status = "uit"
+
+#         print(f"\t{str(type(apparaat))[26:-2]} van {kamer} staat {status}")
+
+#     kamer: Kamer = woning.kamers[vorigeKamerInt]
+#     # print(kamer.naam)
+#     for apparaat in kamer.apparaten_lijst:
+#         # print(f"\t{str(type(apparaat))[26:-2]}: {apparaat}")
+
+#         if apparaat.statusAan:
+#             status = "aan"
+#         else:
+#             status = "uit"
+
+#         print(f"\t{str(type(apparaat))[26:-2]} van {kamer} staat {status}")
+
+
+def logger(woning, huidigeKamerInt, vorigeKamerInt):
 
     kamer: Kamer = woning.kamers[huidigeKamerInt]
-    # print(kamer.naam)
+    print(f"\t{kamer.naam}:")
+
     for apparaat in kamer.apparaten_lijst:
         # print(f"\t{str(type(apparaat))[26:-2]}: {apparaat}")
 
@@ -149,10 +177,13 @@ def logger(woning, huidigeKamerInt, vorigeKamerInt):
         else:
             status = "uit"
 
-        print(f"\t{str(type(apparaat))[26:-2]} van {kamer} staat {status}")
+        # print(f"\t\t{str(type(apparaat))[26:-2]} van {kamer} staat {status}")
+        print(f"\t\t{str(type(apparaat))[26:-2]}\tstaat {status}")
+
 
     kamer: Kamer = woning.kamers[vorigeKamerInt]
-    # print(kamer.naam)
+    print(f"\t{kamer.naam}:")
+
     for apparaat in kamer.apparaten_lijst:
         # print(f"\t{str(type(apparaat))[26:-2]}: {apparaat}")
 
@@ -161,7 +192,8 @@ def logger(woning, huidigeKamerInt, vorigeKamerInt):
         else:
             status = "uit"
 
-        print(f"\t{str(type(apparaat))[26:-2]} van {kamer} staat {status}")
+        # print(f"\t\t{str(type(apparaat))[26:-2]} van {kamer} staat {status}")
+        print(f"\t\t{str(type(apparaat))[26:-2]}\tstaat {status}")
 
 
 
@@ -173,16 +205,20 @@ def logger(woning, huidigeKamerInt, vorigeKamerInt):
 if __name__ == "__main__":
     # main()
     woning = start_toestand()
-    mane(woning)
+    # mane(woning)
 
     slimme = Smarthub()
 
 
     bewoner_Tom = Bewoner("Tom")
     print(f"\n\n{bewoner_Tom.naam}:")
-    for i in range(2):
+    for i in range(5):
         # print(bewoner_Tom.beweeg_bewoner(woning.kamers), end="\t")
+        bewoner_Tom.beweeg_bewoner(woning.kamers)
+        print(f"\t============ Stap {i+1} ============\n")
         slimme.voer_regel_uit(woning, bewoner_Tom.huidigeKamerInt,bewoner_Tom.vorigeKamerInt)
         logger(woning, bewoner_Tom.huidigeKamerInt,bewoner_Tom.vorigeKamerInt)
+        # print("--------------------------------------------------------------")
         print()
+        time.sleep(1)
     
