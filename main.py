@@ -7,6 +7,7 @@ from Classes.Woning import Woning
 import time
 
 from logger import logger
+from html_generator import maak_huisHTML, write_HTML
 
 def woonkamer():
     lampje = Lamp(75)
@@ -174,7 +175,8 @@ def main():
         print(f"\t============ Stap {i+1} ============\n")
         slimme.voer_regel_uit(woning, bewoner_Tom.huidigeKamerInt,bewoner_Tom.vorigeKamerInt)
         logger(woning, bewoner_Tom.huidigeKamerInt,bewoner_Tom.vorigeKamerInt)
-        # print("--------------------------------------------------------------")
+        write_HTML(maak_huisHTML(woning))
+
         print()
         time.sleep(0.5)
     
