@@ -112,7 +112,7 @@ def start_toestand():
     woning.voeg_kamer_toe(slaapkamer2())
     woning.voeg_kamer_toe(badkamer())
     woning.voeg_kamer_toe(gang())
-    woning.voeg_kamer_toe(smarthub())
+    woning.voeg_smarthub_toe(smarthub())
 
     # for kamer in woning.kamers:
     #     print(kamer.naam)

@@ -8,7 +8,7 @@ class Bewoner():
         self.huidigeKamerInt = 0
         self.vorigeKamerInt = 1
 
-    def beweeg_bewoner(self, nieuwe_kamer):
+    def beweeg_bewoner_manueel(self, nieuwe_kamer):
         self.huidigeKamer = nieuwe_kamer
 
     def beweeg_bewoner(self, kamerlijst: list[Kamer]):

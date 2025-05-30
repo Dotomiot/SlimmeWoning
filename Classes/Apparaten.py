@@ -1,10 +1,14 @@
 class Apparaat:
     def __init__(self):
         self.statusAan = False
+        self.subcribtion_topic_list = []
         self.subcribtions = {}
 
     def pas_status_aan(self, status):
         self.statusAan = status
+
+    def subscribe(self, topic):
+        self.subcribtion_topic_list.append(topic)
 
     def recieve_mqtt(self, topic, data):
         self.subcribtions[topic] = data
@@ -37,7 +41,7 @@ class Thermostaat(Apparaat):
             temperatuur = 100
         self.temperatuur = temperatuur
 
-    def temperatuur(self):
+    def geef_temperatuur(self):
         return self.temperatuur
     
     def __str__(self):

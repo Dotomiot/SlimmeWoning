@@ -1,11 +1,16 @@
-from .Apparaten import *
-from .Kamer import Kamer
-from .Woning import Woning
+from __future__ import annotations  # nodig voor string type hints als "Woning"
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from .Woning import Woning
+    from .Apparaten import *
+    from .Kamer import Kamer
 
 class Smarthub():
-    def __init__(self):
+    def __init__(self, naam="Smarthub"):
         self.subcribtion_topic_list = []
         self.subcribtions = {}
+        self.naam = naam
 
     def subscribe(self, topic):
         self.subcribtion_topic_list.append(topic)
