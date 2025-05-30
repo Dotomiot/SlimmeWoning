@@ -34,5 +34,5 @@ def main():
     test = randint(0,1)
     print(test)
 
-
-main()
+if __name__ == "__main__":
+    main()
