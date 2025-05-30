@@ -2,9 +2,11 @@ from Classes.Kamer import Kamer
 from datetime import date, time, datetime, timedelta
 
 def logger(woning, huidigeKamerInt, vorigeKamerInt):
-
     nu = datetime.now()
     nu -= timedelta(microseconds=nu.microsecond)
+
+    # PRINT_LINES = f"\t\t{str(type(apparaat))[26:-2]}\tstaat {status}"
+    outputLogger = ""
 
     kamer: Kamer = woning.kamers[huidigeKamerInt]
     print(nu)
@@ -20,6 +22,9 @@ def logger(woning, huidigeKamerInt, vorigeKamerInt):
 
         # print(f"\t\t{str(type(apparaat))[26:-2]} van {kamer} staat {status}")
         print(f"\t\t{str(type(apparaat))[26:-2]}\tstaat {status}")
+        outputLogger += f"{kamer}: "
+        outputLogger += f"\t\t{str(type(apparaat))[26:-2]}\tstaat {status}"
+        outputLogger += ", "
 
 
     kamer: Kamer = woning.kamers[vorigeKamerInt]
@@ -35,3 +40,12 @@ def logger(woning, huidigeKamerInt, vorigeKamerInt):
 
         # print(f"\t\t{str(type(apparaat))[26:-2]} van {kamer} staat {status}")
         print(f"\t\t{str(type(apparaat))[26:-2]}\tstaat {status}")
+        outputLogger += f"{kamer}: "
+        outputLogger += f"\t\t{str(type(apparaat))[26:-2]}\tstaat {status}"
+        outputLogger += ", "
+
+    
+    file = open("logs.txt","a")
+    file.write(f"{nu}\t{outputLogger}\n")
+    file.close()
+
