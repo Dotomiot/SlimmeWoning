@@ -6,7 +6,7 @@ if TYPE_CHECKING:
     from .Apparaten import *
     from .Kamer import Kamer
 
-def regels(apparaat: Apparaat, helderheid=100, temperatuur = 23, slot=True, other=True):
+def regels(apparaat: Apparaat, helderheid=100, temperatuur = 23, slot=True, other=True, detection=False):
     # print(type(apparaat), end=", ")
     # print(str(type(apparaat)).find("Lamp"), end=", ")
     # print(str(type(apparaat)).find("Deurslot"), end=", ")
@@ -31,7 +31,7 @@ def regels(apparaat: Apparaat, helderheid=100, temperatuur = 23, slot=True, othe
     elif str(type(apparaat)).find("Beweging") == 26:
         bewegingssensor:Bewegingssensor = apparaat
 
-        bewegingssensor.statusAan = True
+        bewegingssensor.statusAan = detection
 
     elif str(type(apparaat)).find("Rook") == 26:
         rookmelder:Rookmelder = apparaat
@@ -65,9 +65,9 @@ class Smarthub():
         for apparaat in kamer.apparaten_lijst:
 
             if scenario == 1: # default
-                regels(apparaat)
+                regels(apparaat, detection=True)
             elif scenario == 2: # nacht
-                regels(apparaat, 25, 18, True, False)
+                regels(apparaat, 25, 18, True, False, True)
             # elif scenario == 3: # vakantie
 
 
