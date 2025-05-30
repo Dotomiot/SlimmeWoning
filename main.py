@@ -6,6 +6,8 @@ from Classes.Smarthub import Smarthub
 from Classes.Woning import Woning
 import time
 
+from logger import logger
+
 def woonkamer():
     lampje = Lamp(75)
     thermos = Thermostaat(22)
@@ -131,71 +133,6 @@ def mane(woning: Woning):
     print(woning.kamers[2])
 
 
-# def logger(woning, huidigeKamerInt, vorigeKamerInt):
-#     # for kamer in woning.kamers:
-#     #     print(kamer)
-#     #     for apparaat in kamer.apparaten_lijst:
-#     #         print(f"\t{str(type(apparaat))[26:-2]}: {apparaat}")
-
-#     # print()
-
-#     kamer: Kamer = woning.kamers[huidigeKamerInt]
-#     # print(kamer.naam)
-#     for apparaat in kamer.apparaten_lijst:
-#         # print(f"\t{str(type(apparaat))[26:-2]}: {apparaat}")
-
-#         if apparaat.statusAan:
-#             status = "aan"
-#         else:
-#             status = "uit"
-
-#         print(f"\t{str(type(apparaat))[26:-2]} van {kamer} staat {status}")
-
-#     kamer: Kamer = woning.kamers[vorigeKamerInt]
-#     # print(kamer.naam)
-#     for apparaat in kamer.apparaten_lijst:
-#         # print(f"\t{str(type(apparaat))[26:-2]}: {apparaat}")
-
-#         if apparaat.statusAan:
-#             status = "aan"
-#         else:
-#             status = "uit"
-
-#         print(f"\t{str(type(apparaat))[26:-2]} van {kamer} staat {status}")
-
-
-def logger(woning, huidigeKamerInt, vorigeKamerInt):
-
-    kamer: Kamer = woning.kamers[huidigeKamerInt]
-    print(f"\t{kamer.naam}:")
-
-    for apparaat in kamer.apparaten_lijst:
-        # print(f"\t{str(type(apparaat))[26:-2]}: {apparaat}")
-
-        if apparaat.statusAan:
-            status = "aan"
-        else:
-            status = "uit"
-
-        # print(f"\t\t{str(type(apparaat))[26:-2]} van {kamer} staat {status}")
-        print(f"\t\t{str(type(apparaat))[26:-2]}\tstaat {status}")
-
-
-    kamer: Kamer = woning.kamers[vorigeKamerInt]
-    print(f"\t{kamer.naam}:")
-
-    for apparaat in kamer.apparaten_lijst:
-        # print(f"\t{str(type(apparaat))[26:-2]}: {apparaat}")
-
-        if apparaat.statusAan:
-            status = "aan"
-        else:
-            status = "uit"
-
-        # print(f"\t\t{str(type(apparaat))[26:-2]} van {kamer} staat {status}")
-        print(f"\t\t{str(type(apparaat))[26:-2]}\tstaat {status}")
-
-
 def terminal_start():
     looping = True
     DEFAULT = 10
@@ -239,7 +176,7 @@ def main():
         logger(woning, bewoner_Tom.huidigeKamerInt,bewoner_Tom.vorigeKamerInt)
         # print("--------------------------------------------------------------")
         print()
-        time.sleep(1)
+        time.sleep(0.5)
     
 if __name__ == "__main__":
     main()
