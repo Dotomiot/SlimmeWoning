@@ -281,7 +281,7 @@ def main():
     example_subscriptions(woning)
 
     bewoner_Tom = Bewoner("Tom")
-    print(f"\n\n{bewoner_Tom.naam}:")
+    # print(f"\n\n{bewoner_Tom.naam}:")
     for i in range(AANTAL_STAPPEN):
 
         answer = input("Press enter to take a step, 1 to view all the IOT data, 2 to publish to an MQTT topic: ")
