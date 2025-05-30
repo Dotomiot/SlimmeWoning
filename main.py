@@ -140,11 +140,29 @@ def mane(woning: Woning):
     print(woning.kamers[2])
 
 
+def terminal_scenario():
+    looping = True
+    DEFAULT = "Normaal"
+
+    print(f"Welk scenario?? (default={DEFAULT}): ")
+    print(f"1: Normaal, 2: nacht, 3: vakantie")
+
+    while looping:
+        answer = input()
+        try:
+            answer = int(answer)
+            if answer <=3 and answer >= 1:
+                return answer
+            else: 
+                return 1
+        except:
+            return 1
+
 def terminal_start():
     looping = True
     DEFAULT = 10
 
-    print(f"Hoeveel stappen in de simulatie? (default={DEFAULT}) ('q' om te stoppen): ")
+    print(f"Hoeveel stappen in de simulatie? (default={DEFAULT}) ('q' of 0 om te stoppen): ")
 
     while looping:
         answer = input()
@@ -225,6 +243,10 @@ def publish_mqtt_topic_terminal(woning: Woning):
 
 
 def main():
+    SCENARIO = terminal_scenario()
+
+    print(SCENARIO)
+
     AANTAL_STAPPEN = terminal_start()
 
     if AANTAL_STAPPEN == 0:
@@ -235,20 +257,20 @@ def main():
 
     slimme = woning.smarthub
 
-    MQTT_SLAAPKAMER1_SLOT = MQTT_topic("slimHuis/slaapkamer1/slot")
-    MQTT_SLAAPKAMER1_TEMP = MQTT_topic("slimHuis/slaapkamer1/temp")
+    # MQTT_SLAAPKAMER1_SLOT = MQTT_topic("slimHuis/slaapkamer1/slot")
+    # MQTT_SLAAPKAMER1_TEMP = MQTT_topic("slimHuis/slaapkamer1/temp")
 
-    MQTT_SLAAPKAMER1_SLOT.subscribe(slimme)
-    MQTT_SLAAPKAMER1_TEMP.subscribe(slimme)
+    # MQTT_SLAAPKAMER1_SLOT.subscribe(slimme)
+    # MQTT_SLAAPKAMER1_TEMP.subscribe(slimme)
 
-    warma = Thermostaat(32)
+    # warma = Thermostaat(32)
 
-    MQTT_SLAAPKAMER1_TEMP.publish(warma.geef_temperatuur())
-    print(slimme.subcribtions)
-    MQTT_SLAAPKAMER1_TEMP.publish(warma.geef_temperatuur()+1)
+    # MQTT_SLAAPKAMER1_TEMP.publish(warma.geef_temperatuur())
+    # print(slimme.subcribtions)
+    # MQTT_SLAAPKAMER1_TEMP.publish(warma.geef_temperatuur()+1)
 
-    print(slimme.subcribtion_topic_list)
-    print(slimme.subcribtions)
+    # print(slimme.subcribtion_topic_list)
+    # print(slimme.subcribtions)
 
     example_subscriptions(woning)
 
